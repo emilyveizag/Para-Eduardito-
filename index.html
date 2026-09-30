@@ -3,182 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Día de los Hot Wheels, mi amorcito!</title>
+    <title>Para mi Duducito🏎️🔥</title>
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary: #ff1d25;
             --secondary: #ff8c00;
             --accent: #ffcc00;
-            --card-bg: rgba(20, 20, 20, 0.88);
-            --text-color: #ffffff;
+            --dark: #0a0a0a;
+            --card-bg: rgba(18, 18, 18, 0.92);
+            --text: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 20px;
-            /* Fondo de Hot Wheels */
-            background: #0d0d0d url('https://i.pinimg.com/736x/87/42/ed/8742ed4121ea2f79cebbcf630e2ea84b.jpg') no-repeat center center fixed;
+            background: var(--dark) url('https://i.pinimg.com/736x/87/42/ed/8742ed4121ea2f79cebbcf630e2ea84b.jpg') no-repeat center center fixed;
             background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-color);
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            padding: 20px 10px;
         }
 
-        .container {
+        .main-card {
             background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 30px 25px;
-            max-width: 500px;
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--secondary);
+            border-radius: 24px;
+            padding: 30px 20px;
+            max-width: 480px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 140, 0, 0.4);
-            border: 2px solid var(--secondary);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 140, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .tag-para {
-            color: var(--accent);
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            background-size: 300% 100%;
+            animation: moveGradient 4s linear infinite;
         }
 
-        h1 {
-            color: #ffffff;
-            font-size: 1.8rem;
-            margin-top: 10px;
-            text-shadow: 2px 2px 4px #000;
+        @keyframes moveGradient {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
         }
 
-        .flame-icon {
-            font-size: 3rem;
+        .badge-para {
             display: inline-block;
-            margin: 10px 0;
-            animation: pulse 1.5s infinite alternate;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(255, 29, 37, 0.4);
+            margin-bottom: 15px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff1d25); }
-            100% { transform: scale(1.15); filter: drop-shadow(0 0 15px #ff8c00); }
+        .title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
-        .btn-group {
+        .subtitle {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        /* Menú de opciones */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 140, 0, 0.3);
+            border-radius: 16px;
+            padding: 15px 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
 
-        .btn {
-            background: linear-gradient(135deg, #ff1d25, #ff8c00);
-            color: white;
+        .btn-option i {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-option:hover {
+            background: linear-gradient(135deg, rgba(255, 29, 37, 0.2), rgba(255, 140, 0, 0.2));
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .btn-option:hover i {
+            transform: scale(1.2) rotate(-5deg);
+            color: var(--accent);
+        }
+
+        .btn-full {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            padding: 14px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 29, 37, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: white;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
-            background: linear-gradient(135deg, #ff8c00, #ffcc00);
-            color: #000;
+        .btn-full i {
+            color: white;
         }
 
-        .hidden-content {
+        /* Paneles de contenido */
+        .content-panel {
             display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--secondary);
-            animation: fadeIn 0.6s ease;
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid var(--secondary);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+            text-align: left;
+            animation: slideUp 0.4s ease forwards;
+            position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .carta {
-            text-align: left;
+        .btn-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .btn-close:hover { color: var(--primary); }
+
+        .carta-p {
             line-height: 1.6;
-            background: rgba(35, 35, 35, 0.9);
-            padding: 18px;
-            border-radius: 12px;
-            border-left: 5px solid var(--secondary);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-            font-size: 1rem;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: #eee;
         }
 
-        .carta p {
-            margin: 8px 0;
-        }
-
-        .firma {
-            margin-top: 15px;
+        .signature {
+            text-align: right;
             font-weight: bold;
             color: var(--accent);
-            font-size: 1.1rem;
-            text-align: right;
+            margin-top: 15px;
+        }
+
+        /* Trivia / Minijuego */
+        .quiz-option {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: var(--secondary);
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Reproductor de audio simulado */
+        .music-player {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #111;
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--secondary);
+            margin-top: 20px;
+        }
+
+        .play-btn {
+            background: var(--secondary);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: black;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="tag-para">Para: Eduardo</div>
-        <div class="flame-icon">🔥🏎️</div>
-        <h1>¡Te tengo una sorpresa especial para ti!</h1>
-        <p>Abre las cartas que preparé para ti:</p>
+    <div class="main-card">
+        <div class="badge-para">🏎️ Para: Eduardito 🏎️</div>
+        <h1 class="title">Edición Especial</h1>
+        <p class="subtitle">Elige una de las opciones:</p>
 
-        <div class="btn-group">
-            <button class="btn" onclick="mostrarCarta('carta1')">🏎️ Ver Primera Sorpresa</button>
-            <button class="btn" onclick="mostrarCarta('carta2')">🏍️ Ver Segunda Sorpresa</button>
+        <!-- Menú de Opciones -->
+        <div class="grid-menu">
+            <button class="btn-option" onclick="openPanel('panel1')">
+                <i class="fa-solid fa-envelope-open-text"></i>
+                <span>Mensaje Especial1</span>
+            </button>
+
+            <button class="btn-option" onclick="openPanel('panel2'); lanzarCohetes();">
+                <i class="fa-solid fa-fire-flame-curved"></i>
+                <span>Mensaje Especial 2</span>
+            </button>
+
+            <button class="btn-option" onclick="openPanel('panel3')">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Mini Trivia</span>
+            </button>
+
+            <button class="btn-option" onclick="openPanel('panel4')">
+                <i class="fa-solid fa-trophy"></i>
+                <span>Tus Cupones</span>
+            </button>
+
+            <button class="btn-option btn-full" onclick="lanzarCohetes()">
+                <i class="fa-solid fa-flag-checkered"></i>
+                <span>¡Acelera! (Celebración)</span>
+            </button>
         </div>
 
-        <!-- CARTA 1 -->
-        <div id="carta1" class="hidden-content">
-            <div class="carta">
-                <p>Hola mi amor,</p>
-                <p>Solo quería prepararte este pequeño detalle para recordarte lo mucho que te quiero y lo importante que eres para mí.</p>
-                <p>¡Gracias por estar siempre para mí y hacerme la chica más feliz!💙</p>
-            </div>
-            <div class="firma">Con todo mi amor,<br>De: Nati</div>
+        <!-- PANEL 1: Mensaje Romántico -->
+        <div id="panel1" class="content-panel">
+            <button class="btn-close" onclick="closePanel('panel1')">&times;</button>
+            <h3 style="color: var(--accent); margin-bottom: 10px;">✉️️ Solo quería decirte...</h3>
+            <p class="carta-p">Hola mi amorcito,</p>
+            <p class="carta-p">Solo quería prepararte este pequeño detalle para recordarte lo mucho que te quiero y lo feliz que me haces.</p>
+            <p class="carta-p">¡Gracias por sacarme siempre una sonrisa y estar siempre ahí para mi!</p>
+            <div class="signature">Con todo mi amor,<br>De: Nati🩷</div>
         </div>
 
-        <!-- CARTA 2 -->
-        <div id="carta2" class="hidden-content">
-            <div class="carta">
-                <p><strong>¡Feliz día de los Hotwheels, mi amorrr! 🏎️💙</strong></p>
-                <p>Eres mi vida, mi motor, y mi razón de sonreír.</p>
-                <p>Gracias por ser parte de mi vida.</p>
-                <p><strong>¡Te amo bonitooo! ❤️✨</strong></p>
-            </div>
-            <div class="firma">De: Nati</div>
+        <!-- PANEL 2: Hot Wheels Day -->
+        <div id="panel2" class="content-panel">
+            <button class="btn-close" onclick="closePanel('panel2')">&times;</button>
+            <h3 style="color: var(--secondary); margin-bottom: 10px;">🔥 ¡Feliz Día de los Hot Wheels!</h3>
+            <p class="carta-p"><strong>¡Eres mi piloto preferido! 🏎️💨</strong></p>
+            <p class="carta-p">Eres mi vida, mi motor y mi razón de vivir . Gracias por ser el mejor compañero, mejor amigo, confidente, novio, que puedo tener.</p>
+            <p class="carta-p"><strong>¡Te amo bonitooo!💙✨</strong></p>
+            <div class="signature">De: Nati🩷</div>
         </div>
+
+        <!-- PANEL 3: Mini Trivia -->
+        <div id="panel3" class="content-panel">
+            <button class="btn-close" onclick="closePanel('panel3')">&times;</button>
+            <h3 style="color: var(--accent); margin-bottom: 10px;">🎮 Pregunta Express</h3>
+            <p id="quiz-question" class="carta-p">¿Quién es el piloto número 1 de mi corazón?</p>
+            <div class="quiz-option" onclick="responderQuiz(true)">A) Tú (mi amorcito)🏆</div>
+            <div class="quiz-option" onclick="responderQuiz(true)">B) Eduardito🏎️</div>
+            <div id="quiz-result" style="margin-top: 10px; font-weight: bold; color: var(--accent);"></div>
+        </div>
+
+        <!-- PANEL 4: Cupones de Regalo -->
+        <div id="panel4" class="content-panel">
+            <button class="btn-close" onclick="closePanel('panel4')">&times;</button>
+            <h3 style="color: var(--secondary); margin-bottom: 10px;">🎟️️ Cupones Especiales</h3>
+            <p class="carta-p">• 🎟️ <strong>Vale por:</strong> Un abrazo sin límite de tiempo.</p>
+            <p class="carta-p">• 🎟️️ <strong>Vale por:</strong> Una salida por tus postres o comida favorita.</p>
+            <p class="carta-p">• 🎟️ <strong>Vale por:</strong> Comprarte un Hot Wheels sorpresa (de papel🤗) 🚗.</p>
+        </div>
+
+        <!-- Reproductor de Audio (Efecto opcional) -->
+        <div class="music-player">
+            <span style="font-size: 0.8rem; color: #aaa;"><i class="fa-solid fa-music"></i> Modo Turbo</span>
+            <button class="play-btn" onclick="toggleAudio()"><i id="audio-icon" class="fa-solid fa-play"></i></button>
+        </div>
+        <audio id="bg-audio" loop src="https://assets.mixkit.co/active_storage/sfx/2874/2874-preview.mp3"></audio>
     </div>
 
     <script>
-        function mostrarCarta(id) {
-            // Ocultar ambas cartas primero
-            document.getElementById('carta1').style.display = 'none';
-            document.getElementById('carta2').style.display = 'none';
-
-            // Mostrar la seleccionada
+        function openPanel(id) {
+            // Ocultar todos los paneles primero
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            // Mostrar el seleccionado
             document.getElementById(id).style.display = 'block';
+        }
+
+        function closePanel(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function responderQuiz(esCorrecto) {
+            const res = document.getElementById('quiz-result');
+            res.innerHTML = "¡Respuesta CORRECTA!  Te ganaste un besito y todo mi amor. ❤️";
+            lanzarCohetes();
+        }
+
+        function lanzarCohetes() {
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff1d25', '#ff8c00', '#ffcc00']
+            });
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('bg-audio');
+            const icon = document.getElementById('audio-icon');
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fa-solid fa-pause';
+            } else {
+                audio.pause();
+                icon.className = 'fa-solid fa-play';
+            }
         }
     </script>
 </body>
-</html>
+    </html>
+    
